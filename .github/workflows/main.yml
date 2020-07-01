@@ -17,6 +17,9 @@ jobs:
       with:
           version: v1.27
 
+    - name: build
+      run: CGO_ENABLED=0 make build
+
 #    - uses: docker/build-push-action@v1
 #      with:
 #        username: ${{ secrets.DOCKER_USERNAME }}
