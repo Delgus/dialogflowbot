@@ -8,7 +8,7 @@ import (
 	easybot "github.com/delgus/easy-bot"
 	"github.com/delgus/easy-bot/clients/tg"
 	"github.com/kelseyhightower/envconfig"
-	"github.com/leominov/logrus-telegram-hook"
+	telegram "github.com/leominov/logrus-telegram-hook"
 	"github.com/sirupsen/logrus"
 )
 
