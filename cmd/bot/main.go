@@ -8,8 +8,8 @@ import (
 	easybot "github.com/delgus/easy-bot"
 	"github.com/delgus/easy-bot/clients/tg"
 	"github.com/kelseyhightower/envconfig"
+	telegram "github.com/leominov/logrus-telegram-hook"
 	"github.com/sirupsen/logrus"
-	tgbotapi "gopkg.in/telegram-bot-api.v4"
 )
 
 type DialogFlowConfig struct {
@@ -29,7 +29,7 @@ type ServerConfig struct {
 
 type TGLoggerConfig struct {
 	LogTGChatID      int64  `envconfig:"LOG_TG_CHAT_ID"`
-	LogTGAccessToken string `envconfig:"LOG_TG_ACCESS_TOKEN_ID"`
+	LogTGAccessToken string `envconfig:"LOG_TG_ACCESS_TOKEN"`
 }
 
 type config struct {
@@ -75,19 +75,7 @@ func main() {
 
 	appLogger := logrus.StandardLogger()
 	appLogger.SetLevel(logrus.DebugLevel)
-
-	logrus.Debug(cfg.LogTGAccessToken, cfg.LogTGChatID)
-	client, err := tgbotapi.NewBotAPI(cfg.LogTGAccessToken)
-	if err != nil {
-		logrus.Fatal(err)
-	}
-	msg := tgbotapi.MessageConfig{}
-	msg.ChatID = cfg.LogTGChatID
-	msg.Text = "Work!!!"
-	res, err := client.Send(msg)
-	if err != nil {
-		logrus.Fatal(err, res)
-	}
+	appLogger.AddHook(telegram.NewHook(cfg.LogTGAccessToken, cfg.LogTGChatID))
 	app := &easybot.App{
 		Notifier: tgNotifier,
 		Bot:      dfBot,
