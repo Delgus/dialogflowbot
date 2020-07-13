@@ -2,14 +2,13 @@ package main
 
 import (
 	"fmt"
-	"net/http"
-
 	"github.com/delgus/dialogflow-tg-bot/internal/bot"
 	easybot "github.com/delgus/easy-bot"
 	"github.com/delgus/easy-bot/clients/tg"
 	"github.com/kelseyhightower/envconfig"
-	telegram "github.com/leominov/logrus-telegram-hook"
 	"github.com/sirupsen/logrus"
+	"gopkg.in/telegram-bot-api.v4"
+	"net/http"
 )
 
 type DialogFlowConfig struct {
@@ -75,7 +74,19 @@ func main() {
 
 	appLogger := logrus.StandardLogger()
 	appLogger.SetLevel(logrus.DebugLevel)
-	appLogger.AddHook(telegram.NewHook(cfg.LogTGAccessToken, cfg.LogTGChatID))
+
+	logrus.Debug(cfg.LogTGAccessToken, cfg.LogTGChatID)
+	client, err := tgbotapi.NewBotAPI(cfg.LogTGAccessToken)
+	if err != nil {
+		logrus.Fatal(err)
+	}
+	msg := tgbotapi.MessageConfig{}
+	msg.ChatID = cfg.LogTGChatID
+	msg.Text = fmt.Sprintf("Work!!!")
+	res, err := client.Send(msg)
+	if err != nil {
+		logrus.Fatal(err, res)
+	}
 	app := &easybot.App{
 		Notifier: tgNotifier,
 		Bot:      dfBot,
