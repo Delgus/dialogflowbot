@@ -8,6 +8,7 @@ import (
 	easybot "github.com/delgus/easy-bot"
 	"github.com/delgus/easy-bot/clients/tg"
 	"github.com/kelseyhightower/envconfig"
+	"github.com/leominov/logrus-telegram-hook"
 	"github.com/sirupsen/logrus"
 )
 
@@ -26,10 +27,15 @@ type ServerConfig struct {
 	Port int    `envconfig:"PORT"`
 }
 
+type TGLoggerConfig struct {
+	TGContactID int64 `envconfig:"TG_CONTACT_ID"`
+}
+
 type config struct {
 	DialogFlowConfig
 	TGConfig
 	ServerConfig
+	TGLoggerConfig
 }
 
 func main() {
@@ -66,11 +72,14 @@ func main() {
 		logrus.Fatalf("can't start listener for bot: %v", err)
 	}
 
+	appLogger := logrus.StandardLogger()
+	appLogger.SetLevel(logrus.DebugLevel)
+	appLogger.AddHook(telegram.NewHook(cfg.TGAccessToken, cfg.TGContactID))
 	app := &easybot.App{
 		Notifier: tgNotifier,
 		Bot:      dfBot,
 		Listener: tgListener,
-		Logger:   logrus.StandardLogger(),
+		Logger:   appLogger,
 		Options:  opts,
 	}
 
