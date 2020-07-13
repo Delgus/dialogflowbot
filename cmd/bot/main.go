@@ -2,13 +2,14 @@ package main
 
 import (
 	"fmt"
+	"net/http"
+
 	"github.com/delgus/dialogflow-tg-bot/internal/bot"
 	easybot "github.com/delgus/easy-bot"
 	"github.com/delgus/easy-bot/clients/tg"
 	"github.com/kelseyhightower/envconfig"
 	"github.com/sirupsen/logrus"
-	"gopkg.in/telegram-bot-api.v4"
-	"net/http"
+	tgbotapi "gopkg.in/telegram-bot-api.v4"
 )
 
 type DialogFlowConfig struct {
@@ -82,7 +83,7 @@ func main() {
 	}
 	msg := tgbotapi.MessageConfig{}
 	msg.ChatID = cfg.LogTGChatID
-	msg.Text = fmt.Sprintf("Work!!!")
+	msg.Text = "Work!!!"
 	res, err := client.Send(msg)
 	if err != nil {
 		logrus.Fatal(err, res)
