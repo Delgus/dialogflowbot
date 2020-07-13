@@ -28,7 +28,8 @@ type ServerConfig struct {
 }
 
 type TGLoggerConfig struct {
-	TGContactID int64 `envconfig:"TG_CONTACT_ID"`
+	LogTGChatID      int64  `envconfig:"LOG_TG_CHAT_ID"`
+	LogTGAccessToken string `envconfig:"LOG_TG_ACCESS_TOKEN_ID"`
 }
 
 type config struct {
@@ -74,7 +75,7 @@ func main() {
 
 	appLogger := logrus.StandardLogger()
 	appLogger.SetLevel(logrus.DebugLevel)
-	appLogger.AddHook(telegram.NewHook(cfg.TGAccessToken, cfg.TGContactID))
+	appLogger.AddHook(telegram.NewHook(cfg.LogTGAccessToken, cfg.LogTGChatID))
 	app := &easybot.App{
 		Notifier: tgNotifier,
 		Bot:      dfBot,
