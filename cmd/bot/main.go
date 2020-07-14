@@ -12,31 +12,16 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-type DialogFlowConfig struct {
-	CredentialsJSON string `envconfig:"CREDENTIALS_JSON"`
-	ProjectID       string `envconfig:"PROJECT_ID"`
-}
-
-type TGConfig struct {
-	TGAccessToken string `envconfig:"TG_ACCESS_TOKEN"`
-	TGWebhook     string `envconfig:"TG_WEBHOOK"`
-}
-
-type ServerConfig struct {
-	Host string `envconfig:"HOST"`
-	Port int    `envconfig:"PORT"`
-}
-
-type TGLoggerConfig struct {
+type config struct {
+	CredentialsJSON  string `envconfig:"CREDENTIALS_JSON"`
+	ProjectID        string `envconfig:"PROJECT_ID"`
+	TGAccessToken    string `envconfig:"TG_ACCESS_TOKEN"`
+	TGWebhook        string `envconfig:"TG_WEBHOOK"`
+	Host             string `envconfig:"HOST"`
+	Port             int    `envconfig:"PORT"`
+	LogLevel         string `envconfig:"LOG_LEVEL"`
 	LogTGChatID      int64  `envconfig:"LOG_TG_CHAT_ID"`
 	LogTGAccessToken string `envconfig:"LOG_TG_ACCESS_TOKEN"`
-}
-
-type config struct {
-	DialogFlowConfig
-	TGConfig
-	ServerConfig
-	TGLoggerConfig
 }
 
 func main() {
@@ -46,7 +31,7 @@ func main() {
 	if err != nil {
 		logrus.Fatalf("can't load config: %v", err)
 	}
-	logrus.SetLevel(logrus.TraceLevel)
+	logrus.SetLevel(parseLogLevel(cfg.LogLevel))
 
 	// dialogflow bot
 	dfBot, err := bot.NewBot(cfg.CredentialsJSON, cfg.ProjectID)
@@ -74,14 +59,12 @@ func main() {
 		logrus.Fatalf("can't start listener for bot: %v", err)
 	}
 
-	appLogger := logrus.New()
-	appLogger.SetLevel(logrus.TraceLevel)
 	hook, err := tghook.NewHook(cfg.LogTGAccessToken, cfg.LogTGChatID, logrus.AllLevels)
 	if err != nil {
 		logrus.Errorf(`can not create tg hook for logging`)
 	} else {
 		logrus.Info(`create tg hook for logging`)
-		appLogger.Hooks.Add(hook)
+		logrus.StandardLogger().AddHook(hook)
 		logrus.Info(`add hook!!!`)
 	}
 
@@ -89,7 +72,7 @@ func main() {
 		Notifier: tgNotifier,
 		Bot:      dfBot,
 		Listener: tgListener,
-		Logger:   appLogger,
+		Logger:   logrus.StandardLogger(),
 		Options:  opts,
 	}
 
@@ -102,4 +85,23 @@ func main() {
 	logrus.Info("start server for tg and app")
 	addr := fmt.Sprintf(`%s:%d`, cfg.Host, cfg.Port)
 	logrus.Fatal(http.ListenAndServe(addr, nil))
+}
+
+func parseLogLevel(level string) logrus.Level {
+	switch level {
+	case "trace":
+		return logrus.TraceLevel
+	case "debug":
+		return logrus.DebugLevel
+	case "info":
+		return logrus.InfoLevel
+	case "error":
+		return logrus.ErrorLevel
+	case "fatal":
+		return logrus.FatalLevel
+	case "panic":
+		return logrus.PanicLevel
+	default:
+		return logrus.InfoLevel
+	}
 }
