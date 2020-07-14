@@ -7,8 +7,8 @@ import (
 	"github.com/delgus/dialogflow-tg-bot/internal/bot"
 	easybot "github.com/delgus/easy-bot"
 	"github.com/delgus/easy-bot/clients/tg"
+	tghook "github.com/delgus/tg-logrus-hook"
 	"github.com/kelseyhightower/envconfig"
-	telegram "github.com/leominov/logrus-telegram-hook"
 	"github.com/sirupsen/logrus"
 )
 
@@ -75,8 +75,13 @@ func main() {
 
 	appLogger := logrus.StandardLogger()
 	appLogger.SetLevel(logrus.DebugLevel)
-	appLogger.Debug(cfg.LogTGAccessToken, cfg.LogTGChatID)
-	appLogger.AddHook(telegram.NewHook(cfg.LogTGAccessToken, cfg.LogTGChatID))
+	hook, err := tghook.NewHook(cfg.LogTGAccessToken, cfg.LogTGChatID, logrus.AllLevels)
+	if err != nil {
+		logrus.Errorf(`can not create tg hook for logging`)
+	} else {
+		appLogger.AddHook(hook)
+	}
+
 	app := &easybot.App{
 		Notifier: tgNotifier,
 		Bot:      dfBot,
