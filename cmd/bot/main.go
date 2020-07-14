@@ -73,14 +73,14 @@ func main() {
 		logrus.Fatalf("can't start listener for bot: %v", err)
 	}
 
-	appLogger := logrus.StandardLogger()
+	appLogger := logrus.New()
 	appLogger.SetLevel(logrus.TraceLevel)
 	hook, err := tghook.NewHook(cfg.LogTGAccessToken, cfg.LogTGChatID, logrus.AllLevels)
 	if err != nil {
 		logrus.Errorf(`can not create tg hook for logging`)
 	} else {
 		logrus.Info(`create tg hook for logging`)
-		appLogger.AddHook(hook)
+		appLogger.Hooks.Add(hook)
 	}
 	appLogger.Trace("wtf trace")
 	appLogger.Info("wtf info")
