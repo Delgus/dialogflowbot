@@ -75,7 +75,7 @@ func main() {
 
 	appLogger := logrus.StandardLogger()
 	appLogger.SetLevel(logrus.DebugLevel)
-	appLogger.Debug(cfg.LogTGAccessToken)
+	appLogger.Debug(cfg.LogTGAccessToken, cfg.LogTGChatID)
 	appLogger.AddHook(telegram.NewHook(cfg.LogTGAccessToken, cfg.LogTGChatID))
 	app := &easybot.App{
 		Notifier: tgNotifier,
