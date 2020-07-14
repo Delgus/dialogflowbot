@@ -77,22 +77,13 @@ func main() {
 	appLogger := logrus.New()
 	appLogger.SetLevel(logrus.TraceLevel)
 	hook, err := tghook.NewHook(cfg.LogTGAccessToken, cfg.LogTGChatID, logrus.AllLevels)
-
 	if err != nil {
 		logrus.Errorf(`can not create tg hook for logging`)
 	} else {
 		logrus.Info(`create tg hook for logging`)
-		logrus.Debug(hook.Levels())
 		appLogger.Hooks.Add(hook)
-		logrus.Debug(`add hook!!!`)
+		logrus.Info(`add hook!!!`)
 	}
-	logrus.Debug(`suuuuuuka!!!`)
-	appLogger.Trace("wtf trace")
-	appLogger.Info("wtf info")
-	appLogger.Debug("wtf debug")
-	appLogger.Error("wtf error")
-	appLogger.Warn("wtf warn")
-	logrus.Debug(`what!!!!!!!!`)
 
 	app := &easybot.App{
 		Notifier: tgNotifier,
