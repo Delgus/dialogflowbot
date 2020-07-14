@@ -46,6 +46,7 @@ func main() {
 	if err != nil {
 		logrus.Fatalf("can't load config: %v", err)
 	}
+	logrus.SetLevel(logrus.TraceLevel)
 
 	// dialogflow bot
 	dfBot, err := bot.NewBot(cfg.CredentialsJSON, cfg.ProjectID)
