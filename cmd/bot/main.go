@@ -82,6 +82,11 @@ func main() {
 		logrus.Info(`create tg hook for logging`)
 		appLogger.AddHook(hook)
 	}
+	appLogger.Trace("wtf trace")
+	appLogger.Info("wtf info")
+	appLogger.Debug("wtf debug")
+	appLogger.Error("wtf error")
+	appLogger.Warn("wtf warn")
 
 	app := &easybot.App{
 		Notifier: tgNotifier,
