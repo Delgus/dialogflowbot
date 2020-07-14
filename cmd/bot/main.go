@@ -74,11 +74,12 @@ func main() {
 	}
 
 	appLogger := logrus.New()
+	appLogger.SetLevel(logrus.TraceLevel)
 	hook, err := tghook.NewHook(cfg.LogTGAccessToken, cfg.LogTGChatID, logrus.AllLevels)
 	if err != nil {
 		logrus.Errorf(`can not create tg hook for logging`)
 	} else {
-		logrus.Debug(`create tg hook for logging`)
+		logrus.Info(`create tg hook for logging`)
 		appLogger.AddHook(hook)
 	}
 
