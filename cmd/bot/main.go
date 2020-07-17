@@ -17,8 +17,6 @@ type config struct {
 	ProjectID        string `envconfig:"PROJECT_ID"`
 	TGAccessToken    string `envconfig:"TG_ACCESS_TOKEN"`
 	TGWebhook        string `envconfig:"TG_WEBHOOK"`
-	Host             string `envconfig:"HOST"`
-	Port             int    `envconfig:"PORT"`
 	LogLevel         string `envconfig:"LOG_LEVEL"`
 	LogTGChatID      int64  `envconfig:"LOG_TG_CHAT_ID"`
 	LogTGAccessToken string `envconfig:"LOG_TG_ACCESS_TOKEN"`
@@ -83,8 +81,7 @@ func main() {
 	}()
 
 	logrus.Info("start server for tg and app")
-	addr := fmt.Sprintf(`%s:%d`, cfg.Host, cfg.Port)
-	logrus.Fatal(http.ListenAndServe(addr, nil))
+	logrus.Fatal(http.ListenAndServe(":80", nil))
 }
 
 func parseLogLevel(level string) logrus.Level {
