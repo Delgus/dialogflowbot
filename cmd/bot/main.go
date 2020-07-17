@@ -61,7 +61,7 @@ func main() {
 
 	hook, err := tghook.NewHook(cfg.LogTGAccessToken, cfg.LogTGChatID, logrus.AllLevels)
 	if err != nil {
-		logrus.Errorf(`can not create tg hook for logging`)
+		logrus.Errorf(`can not create tg hook for logging: %v`, err)
 	} else {
 		logrus.Info(`create tg hook for logging`)
 		logrus.StandardLogger().AddHook(hook)
