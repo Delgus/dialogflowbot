@@ -38,5 +38,6 @@ jobs:
         LOG_TG_ACCESS_TOKEN: ${{ secrets.LOG_TG_ACCESS_TOKEN }}
         LOG_LEVEL: ${{ secrets.LOG_LEVEL }}
         DOCKER_HOST: tcp://${{ secrets.HOST }}:2376
+        DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}  
       run: docker stack deploy -c deploy.yml dialogflow-tg-bot
           
