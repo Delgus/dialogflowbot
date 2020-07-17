@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  dialogflow-tg-bot:
+    image: delgus/dialogflow-tg-bot
+    environment:
+      - CREDENTIALS_JSON=${{ secrets.CREDENTIALS_JSON }}
+      - PROJECT_ID=${{ secrets.PROJECT_ID }}
+      - PORT=${{ secrets.PORT }}
+      - TG_ACCESS_TOKEN=${{ secrets.TG_ACCESS_TOKEN }}
+      - TG_WEBHOOK=${{ secrets.TG_WEBHOOK}}
+      - LOG_TG_CHAT_ID=${{ secrets.LOG_TG_CHAT_ID}} 
+      - LOG_TG_ACCESS_TOKEN=${{ secrets.LOG_TG_ACCESS_TOKEN }}
+      - LOG_LEVEL=${{ secrets.LOG_LEVEL }}
+    ports:
+      - 80:${{ secrets.DEPLOY_PORT }}
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+		delay: 3s
+		order: start-first
+		failure_action: rollback
+		monitor: 1m
+      restart_policy:
+		max_attempts: 3
