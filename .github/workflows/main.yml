@@ -27,7 +27,11 @@ jobs:
         repository: delgus/dialogflow-tg-bot
         tags: latest
 
-    - name: deploy
+    - name: Deploy to swarm
+      uses: sagebind/docker-swarm-deploy-action@v2
+      with:
+        remote_host: tcp://${{ secrets.HOST }}:2376
+        args:  docker stack deploy -c deploy.yml dialogflow-tg-bot
       env:
         CREDENTIALS_JSON: ${{ secrets.CREDENTIALS_JSON }}
         PROJECT_ID: ${{ secrets.PROJECT_ID }}
@@ -37,7 +41,5 @@ jobs:
         LOG_TG_CHAT_ID: ${{ secrets.LOG_TG_CHAT_ID}} 
         LOG_TG_ACCESS_TOKEN: ${{ secrets.LOG_TG_ACCESS_TOKEN }}
         LOG_LEVEL: ${{ secrets.LOG_LEVEL }}
-        DOCKER_HOST: tcp://${{ secrets.HOST }}:2376
         DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}  
-      run: docker stack deploy -c deploy.yml dialogflow-tg-bot
           
