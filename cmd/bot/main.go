@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/delgus/dialogflow-tg-bot/internal/bot"
