@@ -12,7 +12,7 @@ services:
       - LOG_TG_ACCESS_TOKEN=${LOG_TG_ACCESS_TOKEN}
       - LOG_LEVEL=${LOG_LEVEL}
     ports:
-      - 80:${DEPLOY_PORT}
+      - 80:5001
     #deploy:
      # replicas: 1
      # update_config:
