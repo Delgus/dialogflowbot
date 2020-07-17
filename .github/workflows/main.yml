@@ -28,5 +28,5 @@ jobs:
         tags: latest
 
     - name: deploy
-      run: docker stack deploy -c deploy.yml
+      run: docker stack deploy -c deploy.yml dialogflow-tg-bot
           
