@@ -2,7 +2,7 @@ version: '3.8'
 services:
   dialogflow-tg-bot:
     image: delgus/dialogflow-tg-bot
-    network_mode: host
+    # network_mode: host
     environment:
       - CREDENTIALS_JSON=${CREDENTIALS_JSON}
       - PROJECT_ID=${PROJECT_ID}
