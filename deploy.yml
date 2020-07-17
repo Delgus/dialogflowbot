@@ -8,18 +8,18 @@ services:
       - PORT=${PORT}
       - TG_ACCESS_TOKEN=${TG_ACCESS_TOKEN}
       - TG_WEBHOOK=${TG_WEBHOOK}
-      - LOG_TG_CHAT_ID=${LOG_TG_CHAT_ID} 
+      - LOG_TG_CHAT_ID=${LOG_TG_CHAT_ID}
       - LOG_TG_ACCESS_TOKEN=${LOG_TG_ACCESS_TOKEN}
       - LOG_LEVEL=${LOG_LEVEL}
     ports:
       - "80:${DEPLOY_PORT}"
     deploy:
-    	replicas: 1
-	update_config:
-	  parallelism: 2
-	  delay: 3s
-	  order: start-first
-	  failure_action: rollback
-	  monitor: 1m
-	restart_policy:
-	  max_attempts: 3
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 3s
+        order: start-first
+        failure_action: rollback
+        monitor: 1m
+      restart_policy:
+        max_attempts: 3
