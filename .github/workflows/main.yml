@@ -28,5 +28,15 @@ jobs:
         tags: latest
 
     - name: deploy
+      env:
+        CREDENTIALS_JSON: ${{ secrets.CREDENTIALS_JSON }}
+        PROJECT_ID: ${{ secrets.PROJECT_ID }}
+        PORT: ${{ secrets.PORT }}
+        TG_ACCESS_TOKEN: ${{ secrets.TG_ACCESS_TOKEN }}
+        TG_WEBHOOK: ${{ secrets.TG_WEBHOOK}}
+        LOG_TG_CHAT_ID: ${{ secrets.LOG_TG_CHAT_ID}} 
+        LOG_TG_ACCESS_TOKEN: ${{ secrets.LOG_TG_ACCESS_TOKEN }}
+        LOG_LEVEL: ${{ secrets.LOG_LEVEL }}
+        DOCKER_HOST: tcp://${{ secrets.HOST }}:2376
       run: docker stack deploy -c deploy.yml dialogflow-tg-bot
           
