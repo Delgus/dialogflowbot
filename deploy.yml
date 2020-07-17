@@ -2,6 +2,7 @@ version: '3.8'
 services:
   dialogflow-tg-bot:
     image: delgus/dialogflow-tg-bot
+    name: dialogflow-tg-bot
     # network_mode: host
     environment:
       - CREDENTIALS_JSON=${CREDENTIALS_JSON}
