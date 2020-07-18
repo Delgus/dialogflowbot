@@ -1,6 +1,6 @@
 # Telegram + DialogFlow
 ## Bot
-[https://t.me/dialogflowdelgusbot](@dialogflowdelgusbot)
+[@dialogflowdelgusbot](https://t.me/dialogflowdelgusbot)
 
 ## Enviroments
 ```env
