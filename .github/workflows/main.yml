@@ -9,7 +9,7 @@ jobs:
     steps:
     - uses: actions/setup-go@v2
       with:
-        go-version: 1.15
+        go-version: 1.16
         
     - uses: actions/checkout@v2
       
@@ -27,18 +27,18 @@ jobs:
         repository: delgus/dialogflow-tg-bot
         tags: latest
 
-    - name: Deploy to swarm
-      uses: sagebind/docker-swarm-deploy-action@v2
-      with:
-        remote_host: tcp://${{ secrets.HOST }}:2376
-        args: stack deploy -c deploy.yml dialogflow-tg-bot
-      env:
-        CREDENTIALS_JSON: ${{ secrets.CREDENTIALS_JSON }}
-        PROJECT_ID: ${{ secrets.PROJECT_ID }}
-        TG_ACCESS_TOKEN: ${{ secrets.TG_ACCESS_TOKEN }}
-        TG_WEBHOOK: ${{ secrets.TG_WEBHOOK}}
-        LOG_TG_CHAT_ID: ${{ secrets.LOG_TG_CHAT_ID}} 
-        LOG_TG_ACCESS_TOKEN: ${{ secrets.LOG_TG_ACCESS_TOKEN }}
-        LOG_LEVEL: ${{ secrets.LOG_LEVEL }}
-        DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}  
+    #- name: Deploy to swarm
+    #  uses: sagebind/docker-swarm-deploy-action@v2
+    #  with:
+    #    remote_host: tcp://${{ secrets.HOST }}:2376
+    #    args: stack deploy -c deploy.yml dialogflow-tg-bot
+   #   env:
+    #    CREDENTIALS_JSON: ${{ secrets.CREDENTIALS_JSON }}
+     #   PROJECT_ID: ${{ secrets.PROJECT_ID }}
+     #   TG_ACCESS_TOKEN: ${{ secrets.TG_ACCESS_TOKEN }}
+     #   TG_WEBHOOK: ${{ secrets.TG_WEBHOOK}}
+     #   LOG_TG_CHAT_ID: ${{ secrets.LOG_TG_CHAT_ID}} 
+     #   LOG_TG_ACCESS_TOKEN: ${{ secrets.LOG_TG_ACCESS_TOKEN }}
+     #   LOG_LEVEL: ${{ secrets.LOG_LEVEL }}
+     #   DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}  
           
