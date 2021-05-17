@@ -1,6 +1,6 @@
 module github.com/delgus/dialogflow-tg-bot
 
-go 1.15
+go 1.16
 
 require (
 	cloud.google.com/go v0.81.0
