@@ -8,6 +8,6 @@ require (
 	github.com/delgus/tg-logrus-hook v0.0.2
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/sirupsen/logrus v1.8.1
-	google.golang.org/api v0.43.0
-	google.golang.org/genproto v0.0.0-20210402141018-6c239bbf2bb1
+	google.golang.org/api v0.46.0
+	google.golang.org/genproto v0.0.0-20210429181445-86c259c2b4ab
 )
