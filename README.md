@@ -10,6 +10,10 @@
 
 [vkbot](https://vk.com/im?sel=-205333881)
 
+### Web (websocket-based)
+
+[web chat](https://delgus.tk)
+
 ## How use?
 
 
