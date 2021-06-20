@@ -50,7 +50,7 @@ func Run() {
 
 	go server.Listen()
 
-	http.Handle("/", http.FileServer(http.Dir("ws/web")))
+	http.Handle("/", http.FileServer(http.Dir("wsapp/web")))
 }
 
 func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
