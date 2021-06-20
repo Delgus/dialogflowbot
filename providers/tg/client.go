@@ -14,13 +14,12 @@ type Client struct {
 }
 
 func NewClient(accessToken string, webhookURL *url.URL) (*Client, error) {
-	var client *Client
-	var err error
-
-	client.api, err = tg.NewBotAPI(accessToken)
+	api, err := tg.NewBotAPI(accessToken)
 	if err != nil {
 		return nil, err
 	}
+
+	client := &Client{api: api}
 
 	err = client.setWebhookIfNeed(webhookURL.String())
 	if err != nil {
