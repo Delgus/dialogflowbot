@@ -1,6 +1,6 @@
-FROM alpine:3.12
+FROM alpine:latest
 RUN apk --no-cache add ca-certificates
 WORKDIR /root/
-COPY bot bot
+COPY dialogflowbot . 
 EXPOSE 80
-CMD ["./bot"]
+CMD ["./dialogflowbot"]
