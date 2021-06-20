@@ -8,6 +8,8 @@ import (
 	"github.com/delgus/dialogflowbot/providers/common"
 	"github.com/delgus/dialogflowbot/providers/tg"
 	"github.com/delgus/dialogflowbot/providers/vk"
+	"github.com/delgus/dialogflowbot/providers/ws"
+	"github.com/delgus/dialogflowbot/wsapp/chat"
 	"github.com/kelseyhightower/envconfig"
 )
 
@@ -21,6 +23,8 @@ type config struct {
 	VKAccessToken string `envconfig:"VK_ACCESS_TOKEN"`
 	VKWebhook     string `envconfig:"VK_WEBHOOK"`
 	VKConfirmKey  string `envconfig:"VK_CONFIRM_KEY"`
+
+	WSURL string `envconfig:"WS_URL"`
 }
 
 func main() {
@@ -31,7 +35,11 @@ func main() {
 		log.Fatal("can't load config", err)
 	}
 
+	// websocket app
+	chat.Run()
+
 	// providers:
+
 	// tg
 	tgWebhook, err := url.Parse(cfg.TGWebhook)
 	if err != nil {
@@ -54,10 +62,22 @@ func main() {
 		log.Fatal(err)
 	}
 
+	// ws
+	wsURL, err := url.Parse(cfg.WSURL)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	wsProvider := ws.NewClient(wsURL)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	// dialogflow bot
 	dfBot, err := bot.NewBot(cfg.CredentialsJSON, cfg.ProjectID, map[common.ProviderType]common.Provider{
 		common.TGProvider: tgProvider,
 		common.VKProvider: vkProvider,
+		common.WSProvider: wsProvider,
 	})
 	if err != nil {
 		log.Fatal("can't start dialog flow bot", err)

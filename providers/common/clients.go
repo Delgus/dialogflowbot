@@ -4,6 +4,7 @@ const (
 	// Providers
 	TGProvider ProviderType = "tg"
 	VKProvider ProviderType = "vk"
+	WSProvider ProviderType = "ws"
 )
 
 type ProviderType string
