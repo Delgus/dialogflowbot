@@ -1,44 +1,32 @@
 # Dialogflow-based bot
 
-## Prepare Dialogflow
+## Demo
+
+### Telegram
+
+[@dialogflowdelgusbot](https://t.me/dialogflowdelgusbot)
+
+### VKBot
+
+[vkbot](https://vk.com/im?sel=-205333881)
+
+## How use?
+
+
+### Prepare Dialogflow
 1) https://developers.google.com/assistant/conversational/df-asdk/dialogflow/project-agent
 2) You can use prebuilt agents as Small Talk)))
 3) Enable API and create account private key (json) https://cloud.google.com/dialogflow/es/docs/quick/setup
 
-## Bot
-[@dialogflowdelgusbot](https://t.me/dialogflowdelgusbot)
+### register and configurate domain
+I choosed freenom.com for registration my own domain
 
-## Enviroments
-```env
-# For dialogflow
-CREDENTIALS_JSON={}
-PROJECT_ID=example
+### configurate server (ex. certbot, nginx, ubuntu)
 
-# For Telegram bot
-TG_ACCESS_TOKEN='rrrrrr:uy54i5uy4iu5yi'
-TG_WEBHOOK='example.com'
-
-# For Telegram hook
-LOG_TG_CHAT_ID=
-LOG_TG_ACCESS_TOKEN=
-LOG_LEVEL=
-
-# Out port for deploy
-DEPLOY_PORT=
-```
-
-## Nginx configuration example with https (tg webhook need https) Ubuntu 20
-
-### install nginx
 ```
 sudo apt-get install nginx
 ```
 
-### register domain
-I choosed freenom.com for registration my own domain
-
-
-### certbot nginx ubuntu
 https://certbot.eff.org/lets-encrypt/ubuntufocal-nginx
 
 ```
@@ -46,6 +34,9 @@ sudo snap install --classic certbot
 sudo ln -s /snap/bin/certbot /usr/bin/certbot
 sudo certbot --nginx
 ```
+
+### configurate proxy
+
 ```
 server {
         ...
@@ -58,4 +49,31 @@ server {
 }
 
 ```
-5100 - out port for deploy. See higher DEPLOY_PORT
+
+### enviroments
+
+dialogflow.env
+
+```env
+# dilalogflow account
+CREDENTIALS_JSON={"type": "service_account" ...}
+PROJECT_ID=uwytiwuyet-g6566
+
+# telegram
+TG_ACCESS_TOKEN=2000000000:YRUIYIUYIUYIUWYTIUTWUIYTWIUTW
+TG_WEBHOOK=https://mydomain.tk/tg
+
+# vk
+VK_ACCESS_TOKEN=e5b078c3285f44f08fed8e70f4d2eb3e9b3d38d7aa5e91e4b9deff00194e49e31621e6bfc518bc4d2b275
+VK_WEBHOOK=http://mmydomain.tk/vk
+VK_CONFIRM_KEY=fc0d8070
+```
+
+### run with docker
+
+```
+docker run --name dfb -p 5100:80 --env-file dialogflow.env --restart unless-stopped -d delgus/dialogflowbot
+```
+
+
+

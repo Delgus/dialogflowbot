@@ -1,5 +1,3 @@
-PKG := "dialogflow-tg-bot"
-
 all: build
 
 fmt: ## gofmt all project
