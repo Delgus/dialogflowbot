@@ -49,7 +49,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	vkProvider := vk.NewClient(cfg.TGAccessToken, vkWebhook, cfg.VKConfirmKey)
+	vkProvider := vk.NewClient(cfg.VKAccessToken, vkWebhook, cfg.VKConfirmKey)
 	if err != nil {
 		log.Fatal(err)
 	}

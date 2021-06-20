@@ -27,27 +27,34 @@ LOG_LEVEL=
 DEPLOY_PORT=
 ```
 
-## Nginx configuration example with https
+## Nginx configuration example with https (tg webhook need https) Ubuntu 20
+
+### install nginx
+```
+sudo apt-get install nginx
+```
+
+### register domain
+I choosed freenom.com for registration my own domain
+
+
+### certbot nginx ubuntu
+https://certbot.eff.org/lets-encrypt/ubuntufocal-nginx
+
+```
+sudo snap install --classic certbot
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+sudo certbot --nginx
+```
 ```
 server {
-        listen 80;
-        listen 443 ssl http2;
-        server_name dialogflow.example.com;
-        ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
-        ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
-        ssl_trusted_certificate /etc/letsencrypt/live/example.com/chain.pem;
-
-        ssl_stapling on;
-        ssl_stapling_verify on;
-        resolver 127.0.0.1 8.8.8.8;
+        ...
 
         location / {
                 proxy_pass http://127.0.0.1:5100;
         }
 
-        location /.well-known {
-                  root /var/www/letsencrypt;
-        }
+        ...
 }
 
 ```
