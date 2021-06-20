@@ -71,7 +71,11 @@ func (c *Client) GetMessages() <-chan common.Message {
 				continue
 			}
 
-			ch <- common.Message{ChatID: wsChatID, Content: msg.Body}
+			ch <- common.Message{
+				ChatID:   wsChatID,
+				Content:  msg.Body,
+				Provider: common.WSProvider,
+			}
 		}
 	}()
 
