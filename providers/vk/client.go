@@ -5,12 +5,11 @@ import (
 	"net/http"
 	"net/url"
 
-	"dialogflowbot/providers/common"
-
 	"github.com/SevereCloud/vksdk/v2/api"
 	"github.com/SevereCloud/vksdk/v2/api/params"
 	"github.com/SevereCloud/vksdk/v2/callback"
 	"github.com/SevereCloud/vksdk/v2/events"
+	"github.com/delgus/dialogflowbot/providers/common"
 )
 
 type Client struct {

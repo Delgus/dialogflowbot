@@ -4,11 +4,10 @@ import (
 	"log"
 	"net/url"
 
-	"dialogflowbot/bot"
-	"dialogflowbot/providers/common"
-	"dialogflowbot/providers/tg"
-	"dialogflowbot/providers/vk"
-
+	"github.com/delgus/dialogflowbot/bot"
+	"github.com/delgus/dialogflowbot/providers/common"
+	"github.com/delgus/dialogflowbot/providers/tg"
+	"github.com/delgus/dialogflowbot/providers/vk"
 	"github.com/kelseyhightower/envconfig"
 )
 

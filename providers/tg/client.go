@@ -4,8 +4,7 @@ import (
 	"fmt"
 	"net/url"
 
-	"dialogflowbot/providers/common"
-
+	"github.com/delgus/dialogflowbot/providers/common"
 	tg "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 

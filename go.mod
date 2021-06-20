@@ -1,11 +1,10 @@
-module dialogflowbot
+module github.com/delgus/dialogflowbot
 
 go 1.16
 
 require (
 	cloud.google.com/go v0.84.0
 	github.com/SevereCloud/vksdk/v2 v2.10.0
-	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/go-telegram-bot-api/telegram-bot-api v4.6.4+incompatible
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/technoweenie/multipartstreamer v1.0.1 // indirect
