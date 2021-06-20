@@ -22,7 +22,7 @@ window.onload = function () {
             return
         }
 
-        chatbox.innerHTML += msg.author + ": " + msg.body + "<br>";
+        chatbox.innerHTML += "client_" + msg.user_id + ": " + msg.body + "<br>";
         chatbox.scrollTop = 9999;
     };
 
