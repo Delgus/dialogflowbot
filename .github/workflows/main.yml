@@ -22,7 +22,7 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        repository: delgus/dialogflow-tg-bot
+        repository: delgus/dialogflowbot
         tags: latest
 
     #- name: Deploy to swarm
