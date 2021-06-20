@@ -22,11 +22,7 @@ type Client struct {
 }
 
 func NewClient(websocketURL *url.URL) *Client {
-	client := &Client{wsURL: websocketURL}
-
-	go client.connect()
-
-	return client
+	return &Client{wsURL: websocketURL}
 }
 
 func (c *Client) connect() {
@@ -55,6 +51,9 @@ func (c *Client) GetMessages() <-chan common.Message {
 
 	go func() {
 		var msg chat.Message
+
+		c.connect()
+
 		for {
 			if err := c.conn.ReadJSON(&msg); err != nil {
 				c.conn.Close()
