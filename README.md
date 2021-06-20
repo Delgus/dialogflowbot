@@ -76,6 +76,10 @@ TG_WEBHOOK=https://mydomain.tk/tg
 VK_ACCESS_TOKEN=e5b078c3285f44f08fed8e70f4d2eb3e9b3d38d7aa5e91e4b9deff00194e49e31621e6bfc518bc4d2b275
 VK_WEBHOOK=http://mmydomain.tk/vk
 VK_CONFIRM_KEY=fc0d8070
+
+# websockets
+WS_URL=wss://delgus.tk/entry
+
 ```
 
 ### run with docker
