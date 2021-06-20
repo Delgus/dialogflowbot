@@ -66,8 +66,9 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	go client.listenWrite()
 	go client.listenRead()
-
-	client.send <- &Message{Type: ConnectMessageType, Body: "connected", UserID: client.id}
+	go func(client *Client) {
+		client.send <- &Message{Type: ConnectMessageType, Body: "connected", UserID: client.id}
+	}(client)
 }
 
 // Listen and serve.
