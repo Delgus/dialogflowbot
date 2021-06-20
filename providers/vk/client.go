@@ -16,18 +16,21 @@ import (
 type Client struct {
 	api        *api.VK
 	webhookURL *url.URL
+	confirmKey string
 }
 
-func NewClient(accessToken string, webhookURL *url.URL) *Client {
+func NewClient(accessToken string, webhookURL *url.URL, confirmKey string) *Client {
 	return &Client{
 		api:        api.NewVK(accessToken),
 		webhookURL: webhookURL,
+		confirmKey: confirmKey,
 	}
 }
 
 func (c *Client) GetMessages() <-chan common.Message {
 	ch := make(chan common.Message)
 	cb := callback.NewCallback()
+	cb.ConfirmationKey = c.confirmKey
 
 	cb.MessageNew(func(ctx context.Context, obj events.MessageNewObject) {
 		ch <- common.Message{

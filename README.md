@@ -1,4 +1,10 @@
-# Telegram + DialogFlow
+# Dialogflow-based bot
+
+## Prepare Dialogflow
+1) https://developers.google.com/assistant/conversational/df-asdk/dialogflow/project-agent
+2) You can use prebuilt agents as Small Talk)))
+3) Enable API and create account private key (json) https://cloud.google.com/dialogflow/es/docs/quick/setup
+
 ## Bot
 [@dialogflowdelgusbot](https://t.me/dialogflowdelgusbot)
 

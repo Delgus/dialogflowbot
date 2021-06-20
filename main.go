@@ -21,6 +21,7 @@ type config struct {
 
 	VKAccessToken string `envconfig:"VK_ACCESS_TOKEN"`
 	VKWebhook     string `envconfig:"VK_WEBHOOK"`
+	VKConfirmKey  string `envconfig:"VK_CONFIRM_KEY"`
 }
 
 func main() {
@@ -49,7 +50,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	vkProvider := vk.NewClient(cfg.TGAccessToken, vkWebhook)
+	vkProvider := vk.NewClient(cfg.TGAccessToken, vkWebhook, cfg.VKConfirmKey)
 	if err != nil {
 		log.Fatal(err)
 	}
