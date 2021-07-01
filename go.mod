@@ -10,6 +10,6 @@ require (
 	github.com/gorilla/websocket v1.4.2
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/technoweenie/multipartstreamer v1.0.1 // indirect
-	google.golang.org/api v0.49.0
+	google.golang.org/api v0.50.0
 	google.golang.org/genproto v0.0.0-20210629200056-84d6f6074151
 )
