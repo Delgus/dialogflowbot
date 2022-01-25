@@ -5,7 +5,7 @@ go 1.16
 require (
 	cloud.google.com/go v0.93.3 // indirect
 	cloud.google.com/go/dialogflow v0.1.0
-	github.com/SevereCloud/vksdk/v2 v2.10.0
+	github.com/SevereCloud/vksdk/v2 v2.13.0
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/go-telegram-bot-api/telegram-bot-api v4.6.4+incompatible
 	github.com/gorilla/websocket v1.4.2
